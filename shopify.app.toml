@@ -3,29 +3,38 @@
 client_id = "5b665c3a6c7ffae7617536519cc823e2"
 name = "price-history"
 handle = "price-history-8"
-application_url = "https://example.com/"
+application_url = "https://childrens-postcards-habits-latino.trycloudflare.com"
 embedded = true
 
 [build]
+automatically_update_urls_on_dev = true
 include_config_on_deploy = true
 
 [webhooks]
 api_version = "2025-04"
 
   [[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
+
+  [[webhooks.subscriptions]]
   topics = [ "app/uninstalled" ]
   uri = "/webhooks/app/uninstalled"
 
   [[webhooks.subscriptions]]
-  topics = [ "app/scopes_update" ]
-  uri = "/webhooks/app/scopes_update"
+  topics = [ "products/update" ]
+  uri = "/webhooks/app/product_update"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_products,write_products,write_product_listings"
+scopes = "read_products,write_product_listings,write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [
+  "https://childrens-postcards-habits-latino.trycloudflare.com/auth/callback",
+  "https://childrens-postcards-habits-latino.trycloudflare.com/auth/shopify/callback",
+  "https://childrens-postcards-habits-latino.trycloudflare.com/api/auth/callback"
+]
 
 [pos]
 embedded = false
